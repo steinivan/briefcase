@@ -28,6 +28,7 @@
                         &-figure {
                             height: 6rem;
                             width: 6rem;
+                            min-width: 6rem;
                             border-radius: 50%;
                             border: 2px solid black;
                             overflow: hidden;
@@ -88,5 +89,10 @@
                             }
                         }
                 }
+        }
+        &-skills{
+            margin-top: 5rem;
+            display: grid;
+            grid-template-columns: 50% 50%;
         }
 }
