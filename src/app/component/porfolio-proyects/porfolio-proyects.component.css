@@ -1,0 +1,45 @@
+@import '~swiper/swiper-bundle.css';
+@import '~swiper/swiper-bundle.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+
+.swiper-slide{
+    color: white;
+}
+.swiperSlideProyectOne{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.swiper-pagination-bullet-cube{
+    border-radius: 0%;
+    width: 10px;
+    color: blue;
+}
+.swiper-buttonCustom-next{
+    position: absolute;
+    bottom: 14%;
+    right: 14px;
+    z-index: 20;
+    font-size: 40px;
+    transform: rotateX(190deg) rotate(54deg);
+}
+.swiper-buttonCustom-back{
+    position: absolute;
+    bottom: 14%;
+    left: 14px;
+    z-index: 20;
+    font-size: 40px;
+    transform: rotateX(189deg) rotate(314deg);
+}
+.swiper-button-hidden{
+    display: none;
+}
+.swiperSlideShiplandH2,.swiperSlideNarutoH2,.swiperSlideCoffeH2,.swiperSlideBookFlixH2{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    font-size: 20px;
+}
