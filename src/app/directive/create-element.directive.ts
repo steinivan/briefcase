@@ -1,4 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { DataConditionService } from '../service/dataCondition/data-condition.service';
 @Directive({
   selector: '[appCreateElement]'
 })
@@ -14,13 +15,11 @@ export class CreateElementDirective implements AfterViewInit {
   clickEditListen: () => void;
   clickCancelListen: () => void;
   clickDeleteListen: () => void;
-  constructor(private renderer:Renderer2,private ref:ElementRef) {   }
+  constructor(private renderer:Renderer2,private ref:ElementRef,private saveStatus:DataConditionService) {   }
   
 
   @Input() set appCreateElement(name:string){
     this.active = name;
-    // console.log("los nombres",name,this.name)
-    // console.log(this.name + " : ", name!==this.name && name!=='')
     if(name===this.name){
       this.editMode('createEdit');
     } 
@@ -31,7 +30,6 @@ export class CreateElementDirective implements AfterViewInit {
   @Output() eventEdit:EventEmitter<string> = new EventEmitter<string>();
   @Output() dataEmit:EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteDataEmit:EventEmitter<string> = new EventEmitter<string>();
-  @Output() saveInput:EventEmitter<string> = new EventEmitter<string>();
 
 
   UppercaseOneLetter(str:string) {
@@ -50,7 +48,6 @@ export class CreateElementDirective implements AfterViewInit {
     }
     this.clickEditListen = this.renderer.listen(icon,'click',(event)=>{
       this.eventEdit.emit(this.name)
-      console.log("primer lsit")
       this.editMode('edit')
     })
   }
@@ -68,7 +65,6 @@ export class CreateElementDirective implements AfterViewInit {
     const iconSave = this.renderer.createElement('fa-icon');
     this.renderer.setProperty(iconCross,"innerHTML", this.iconCross)
     this.renderer.setProperty(iconSave,"innerHTML", this.iconSave)
-    // const icon = this.renderer.selectRootElement(`#${this.name}Icon`,true)
     switch (type) {
       case 'createEdit':
         this.createEdit(icon,containTitle,iconCross)
@@ -97,25 +93,22 @@ export class CreateElementDirective implements AfterViewInit {
   }
 
   createEdit(icon:any,title:any,iconCross:any){
-    // console.log("removido a",this.name)
-    // console.log(icon)
     this.renderer.setProperty(icon,"innerHTML",this.iconAdd)
     this.renderer.setStyle(icon,"right","25px")
     
     this.renderer.setStyle(iconCross,"right","3px")
     this.renderer.addClass(iconCross,`${this.name}IconCross`)
     this.clickCancelListen = this.renderer.listen(iconCross,"click",(event)=>{
+      const itemList = document.querySelectorAll('.li-'+this.name)[0].children[0].id === 'input-create'
       this.eventEdit.emit(' ')
-      this.saveInput.emit('false')
-      if(this.renderer.selectRootElement("#input-create")){
+      console.log("emitir faslo")
+      this.saveStatus.saveStatus(false)
+      if(itemList){
         this.editMode('create',"remove")
       }
-      console.log("cancel")
     })
     this.renderer.appendChild(title,iconCross)
     this.clickEditListen()
-    this.clickEmitName('edit')
-
     this.clickEditListen = this.renderer.listen(icon,"click",(event)=>{
       console.log("crear")
       this.editMode('create')
@@ -147,21 +140,21 @@ export class CreateElementDirective implements AfterViewInit {
       console.log(inputItem,this.ref.nativeElement)
       this.clickEditListen()
       this.clickEditListen = this.renderer.listen(icon,"click",(event)=>{
-        console.log("guardar")
         value = {name:this.renderer.selectRootElement('#input-create').value,type:this.name}
         this.editMode('save',value)
-        this.saveInput.emit('true')
+        // this.saveInput.emit('true')
+        this.saveStatus.saveStatus(true)
       })
     } else {
+      const ref = this.ref.nativeElement
       const itemCreate = this.renderer.selectRootElement('#input-create').parentNode
-      console.log(itemCreate)
-      this.renderer.removeChild(this.ref.nativeElement,itemCreate)
-      this.editMode('reset')
+        console.log(itemCreate,"remover")
+        this.renderer.removeChild(this.ref.nativeElement,itemCreate)
+        this.editMode('reset')
     }
   }
   save(value:any){
     const itemCreate = this.renderer.selectRootElement('#input-create').parentNode
-    console.log(itemCreate)
     this.renderer.removeChild(this.ref.nativeElement,itemCreate)
     this.editMode('reset')
     this.dataEmit.emit(value)
@@ -173,122 +166,38 @@ export class CreateElementDirective implements AfterViewInit {
   edit(icon:any,action:string){
     const itemList = document.querySelectorAll('.li-'+this.name)
     itemList.forEach(item => {
-      const itemHTML = this.renderer.selectRootElement("#"+item.id,true)
       const iconDelete = this.renderer.createElement('fa-icon');
       this.renderer.setProperty(iconDelete,"innerHTML", this.iconDelete)   
       this.renderer.setProperty(iconDelete,"id", "iconDelete")   
-      this.renderer.addClass(iconDelete, "faMinus")   
-      this.clickDeleteListen()
-      this.clickDeleteListen = this.renderer.listen(iconDelete,"click",(event)=>{
-        this.editMode("delete",this.renderer.parentNode(iconDelete))
-      })
+      this.renderer.addClass(iconDelete, "faMinus")  
       if(action==='addDelete'){
-        this.renderer.appendChild(itemHTML,iconDelete)
+        this.clickDeleteListen = this.renderer.listen(iconDelete,"click",(event)=>{
+          this.editMode("delete",this.renderer.parentNode(iconDelete))
+        })
+        this.renderer.appendChild(item,iconDelete)
       } else {
         const faIconCross = item.childNodes[1]?item.childNodes[1]:undefined;
         if(faIconCross){
-          console.log(faIconCross)
-          this.renderer.removeChild(itemHTML,faIconCross)
+          this.renderer.removeChild(item,faIconCross)
         }
       }
     })
   }
   resetEdit(icon:any,title:any){
     const iconCross = document.querySelector(`.${this.name}IconCross`)?this.renderer.selectRootElement(`.${this.name}IconCross`,true):null
-    // console.log(iconCross)
     this.renderer.setProperty(icon,"innerHTML",this.iconEdit)
     this.renderer.setStyle(icon,"right","16px")
     if(iconCross){
-      this.renderer.removeChild(title,iconCross)
       this.clickEditListen()
+      this.clickDeleteListen()
       this.clickCancelListen()
       this.clickEmitName()
       this.editMode('edit','remove')
+      this.renderer.removeChild(title,iconCross)
+    } else {
+      this.clickEditListen()
+      this.clickEmitName()
     }
-
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // conditionStatus(){
-    // const status = this.status
-    // if(status){
-      // console.log("editOn: ",this.appCreateElementEditOn)
-      // console.log("create: ",status)
-    //   this.create()
-    // } else {
-    //   this.renderer.setProperty(this.ref.nativeElement,"innerHTML",this.iconAdd)
-    //   if(this.name==='j'){}
-      // this.renderer.removeChild(itemUl,item)
-      
-    // }
-  // }
-  // @HostListener("click",['$event'])
-  // clickEvent(event:any){
-  //   let conditionTag = event.target?.tagName;
-  //   conditionTag = (conditionTag==='path' || conditionTag=== 'svg' || conditionTag==='FA-ICON')
-  //   if(conditionTag){
-  //     console.log(this.active,this.ref.nativeElement.id)
-  //   }
-
-  // }
-
-    // console.log(this.ref.nativeElement)
-    // this.status = this.appCreateElementEditOn==='true' && this.status===element?true:false;
-    // if(this.status){
-      // console.log("editOn: ",this.appCreateElementEditOn)
-      // console.log("create: ",status)
-    // }
-    // const item = this.ref.nativeElement.id
-    // console.log(item)
-    // if(this.status){
-      
-
-    // } else { 
-      // this.renderer.setProperty(item,"innerHTML",this.iconSave)
-      // const itemUl = this.renderer.parentNode(this.ref.nativeElement).parentNode
-      // const itemli = this.renderer.selectRootElement(".inputSkillOther",true)
-      // console.log("eliminar")
-      // const itemLi = this.renderer.selectRootElement(`.inputSkill${this.UppercaseOneLetter(this.name)}`)
-      
-    // }
-  // }
-  // private delete(){
-  //   const itemUl = this.renderer.parentNode(this.ref.nativeElement).parentNode
-    // console.log(itemUl)
-        // this.renderer.removeChild(itemUl,itemLi)
-  // }
-  // create(){
-    // const itemContain = this.renderer.parentNode(this.ref.nativeElement).parentNode
-    // const item = this.renderer.createElement("li")
-    // const input = this.renderer.createElement("input")
-    // const li = this.renderer.selectRootElement(`.li-${this.name.toLowerCase()}`,true)
-    // this.renderer.setProperty(item,"id",`inputSkill${this.UppercaseOneLetter(this.name)}`)
-    // this.renderer.addClass(item,`inputSkill${this.UppercaseOneLetter(this.name)}`)
-
-    // this.renderer.setProperty(input,"type","text")
-    // this.renderer.setProperty(input,"value",this.name.toUpperCase())
-
-    // this.renderer.appendChild(item,input)
-    // this.renderer.appendChild(itemContain,item)
-    // this.renderer.insertBefore(itemContain,item,li)
-  //   console.log("crear")
-  // }
-
-
-
 }
-// <li #inputSkillWeb id='inputSkillWeb' *ngIf="addON==='web'" class="col-start-1 row-start-2">
-//                     <input autocomplete="off" type="text" name="" id="inputWeb" class="flex justify-center text-black">
-//                 </li> 

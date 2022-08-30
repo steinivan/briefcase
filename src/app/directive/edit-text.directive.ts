@@ -1,29 +1,35 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, Renderer2 } from '@angular/core';
+import { DataConditionService } from '../service/dataCondition/data-condition.service';
 
 @Directive({
   selector: '[appEditText]'
 })
-export class EditTextDirective implements AfterViewInit{
+export class EditTextDirective implements AfterViewInit,OnChanges{
   private clickCount = 0;
   private id:string;
   private type:string;
   @Output() saveInput:EventEmitter<string> = new EventEmitter<string>();
-  constructor(private renderer:Renderer2,private ref:ElementRef) {
+  constructor(private renderer:Renderer2,private ref:ElementRef, private saveStatus:DataConditionService) {
   }
   private status:boolean;
-  @Input() set appSave(value:string){
-    const item = value==='true'?true:false;
-    const idItem = this.ref.nativeElement.id.split('-')[1]
-    if(!this.status){return}
-    if(item){
-      this.saveInput.emit(this.ref.nativeElement.value.toLowerCase())
-    } else {
-      this.renderer.setProperty(this.ref.nativeElement,"value",idItem.toUpperCase())
-    }
-  }
+  
   @Input() set appEditText(status:string) {
     this.status = status===this.id?true:false;
     this.conditionStatus()
+  }
+  ngOnChanges():void{
+    this.saveStatus.saveOrNotChange.subscribe(item=>{
+      if(!this.status){return}
+      const idItem = this.cleanInput(this.ref.nativeElement.id.split('-')[1])
+      if(item){
+        this.saveInput.emit(this.ref.nativeElement.value.toLowerCase())
+      } else {
+        this.renderer.setProperty(this.ref.nativeElement,"value",idItem.toUpperCase())
+      }
+    })
+  }
+  cleanInput(str:string){
+    return str.replace(/[^a-zA-Z0-9]/g," ")
   }
   conditionStatus(){
     const status = this.status
@@ -31,9 +37,12 @@ export class EditTextDirective implements AfterViewInit{
       this.renderer.addClass(this.ref.nativeElement,"onlyText")
       this.renderer.setProperty(this.ref.nativeElement,"disabled",false)
       this.renderer.setProperty(this.ref.nativeElement,"readOnly",true)
+      this.renderer.removeClass(this.ref.nativeElement,"select-text")
     } else {
       this.renderer.setProperty(this.ref.nativeElement,"readOnly",false)
       this.renderer.setProperty(this.ref.nativeElement,"disabled",true)
+      this.renderer.addClass(this.ref.nativeElement,"select-none")
+      this.renderer.removeClass(this.ref.nativeElement,"select-text")
     }
   }
   ngAfterViewInit(): void {
@@ -69,6 +78,7 @@ export class EditTextDirective implements AfterViewInit{
     this.upperCaseValue()
   }
   private editItem(){
+    this.renderer.addClass(this.ref.nativeElement,"select-text")
     this.renderer.removeClass(this.ref.nativeElement,"onlyText")
     this.renderer.setProperty(this.ref.nativeElement,"readOnly",false)
     console.log("llego a clci")

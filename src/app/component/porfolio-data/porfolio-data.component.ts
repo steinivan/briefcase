@@ -14,7 +14,6 @@ export class PorfolioDataComponent implements OnInit{
   public AcountAdmin:boolean=true;
   public editMode:boolean=false;
   public addON:string='';
-  public saveOrNot:string;
 
   public listType:type[];
   public listLanguage:language[];
@@ -61,15 +60,12 @@ export class PorfolioDataComponent implements OnInit{
         this.clickCount = 0;
     }, 250)
 }
-  saveOrNotFunction(event:string){
-    this.saveOrNot = event
-  }
+
   cleanInput(str:string){
-    return str.replace(/[&\/\\#, +()$~%.'":*?<>{}]/," ")
-    // return str.replace("[^\w\.@-]"," ")
+    return str.replace(/[^a-zA-Z0-9]/g," ")
   }
   cleanInputId(str:string){
-    return str.replace(/[&\/\\#, +()$~%.'":*?<>{}]/,"_")
+    return str.replace(/[^a-zA-Z0-9]/g,"_")
   }
   orderList(list:language[]): void {
     if(this.listLanguage){
@@ -138,11 +134,14 @@ export class PorfolioDataComponent implements OnInit{
         "frame" : this.frameList,
         "other" : this.otherList
       }
-      this.crudService.getType().subscribe(data => {
-        const dataType = data.filter(elem=>{return elem.name.toLowerCase()===name.toLowerCase()});
-        this.crudService.postLanguage({"name":value},dataType[0].id).subscribe()
-      });
-      Element[name].push({"name":value,"type":name})
+      const item = value.replace(' ',"")
+      if(item.length>1){
+        this.crudService.getType().subscribe(data => {
+          const dataType = data.filter(elem=>{return elem.name.toLowerCase()===name.toLowerCase()});
+          this.crudService.postLanguage({"name":value},dataType[0].id).subscribe()
+        });
+        Element[name].push({"name":value,"type":name})
+      }
     }
 
     moveList(name:string,mat:string){
