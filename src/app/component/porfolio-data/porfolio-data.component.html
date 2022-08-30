@@ -1,16 +1,12 @@
 <section class="section-presentation">
-    <!-- <div [ngStyle]="{'padding-top':mt + 'em'}" class="h-full flex flex-col justify-end">
-        <div class="imgBriefcase  flex justify-center">
-            <img class="h-full w-[80%]" src="../../../assets/backgroundPorf.jpg" alt="imagePerson">
-        </div>
-    </div> -->
+    <button class="absolute top-0 right-0 bg-neutral-500 z-50" (click)="info()">info</button>
     <div class="section-presentation-contain">
-        <video autoplay loop poster="../../../assets/videoImgCode.png" class="section-presentation-contain__video">
-            <source src="../../../assets/codeVideo.webm" type="video/webm">
+        <video autoplay loop poster="../../../assets/videoImgCode.png" class="section-presentation-contain__video" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+            <source src="../../../assets/codeVideo.mov" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="section-presentation-contain__header">
-            <figure class="section-presentation-contain__header-figure">
+            <figure class="section-presentation-contain__header-figure" >
                 <p>{{ '{' }}S</p>
                 <span>:</span>
                 <p>I{{ '}' }}</p>
@@ -21,25 +17,36 @@
                     <p> Ivan </p>
                 </div>
                 <div class="section-presentation-contain__header-description-occupation">
-                    <!-- <p #occupationP >Full Stack Developer</p> -->
-                    <p #occupationP ></p>
-                    <span> | </span>
+                    <ul>
+                        <li><span>Full Stack Developer</span></li>
+                        <li><span>FrontEnd ANGULAR/REACT</span></li>
+                        <li><span>BackEnd JAVA</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="section-presentation-skills">
-        <!-- <div class=""> -->
-            <h2 class="section-presentation-skills-web">WEB</h2>
-            <h2 class="section-presentation-skills-frame">FRAMEWORKS</h2>
-            
-            <p>le</p>
-            <p>%</p>
-            <div>barra</div>
-            <p>le</p>
-            <p>%</p>
-            <div>barra</div>
-        <!-- </div> -->
+        <ng-container *ngFor="let typeItem of listType;let num = index">
+            <ul appCreateElement="{{addON}}" (saveInput)="saveOrNotFunction($event)" (deleteDataEmit)="deleteItem($event)" (dataEmit)="saveItem($event)" (eventEdit)="itemEdit($event)"  
+            id="{{'SKILLS' + typeItem.name.toUpperCase()}}">
+                <li class="section-presentation-skills-{{typeItem.name.toLowerCase()}}">
+                    <h2>{{typeItem.name.toUpperCase()}}</h2>
+                    <fa-icon id="{{typeItem.name.toLowerCase()+'Icon'}}"
+                    *ngIf="AcountAdmin===true" [icon]="iconEdit"></fa-icon>
+                </li>
+                <ng-container *ngFor="let item of [webList,frameList,otherList]">
+                    <ng-container *ngFor="let names of item;let i = index">
+                        <li id="{{cleanInputId(names.name.toLowerCase())}}" *ngIf="typeItem.name===names.type" class="relative {{'li-'+cleanInputId(names.type.toLowerCase())}}">
+                            <input  type="text" appSave='{{saveOrNot}}' (saveInput)="saveEditItem($event)" appEditText='{{addON}}'  class="text-black text-center"
+                            id="text-{{cleanInputId(names.name.toLowerCase())}}-{{i}}" value="{{cleanInput(names.name.toUpperCase())}}">
+                        </li>
+                    </ng-container>
+                </ng-container>
+            </ul>
+        </ng-container>
     </div>
 
 </section>

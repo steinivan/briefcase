@@ -2,7 +2,6 @@ import { AfterContentChecked, AfterViewInit, Component, ViewChild, ViewEncapsula
 import {SwiperComponent} from 'swiper/angular'
 import  { SwiperOptions} from 'swiper';
 import SwiperCore,{Pagination,Mousewheel,Keyboard,Lazy} from 'swiper'
-
 SwiperCore.use([Pagination,Mousewheel,Keyboard,Lazy])
 @Component({
   selector: 'app-vista',
@@ -12,13 +11,14 @@ SwiperCore.use([Pagination,Mousewheel,Keyboard,Lazy])
 })
 export class VistaComponent implements AfterContentChecked {
   @ViewChild('swiper') swiper:SwiperComponent;
-  public swiperPageCero:boolean=true;
   config: SwiperOptions = {
+    shortSwipes:false,
+    longSwipesRatio:0.1,
     direction:"vertical",
     autoHeight:true,
     preventInteractionOnTransition:true,
     keyboard:true,
-    mousewheel:true,
+    mousewheel:false,
     updateOnImagesReady:true,
     lazy: {
           loadPrevNext: true,
@@ -32,14 +32,16 @@ export class VistaComponent implements AfterContentChecked {
     },
     resistanceRatio:0,
     };
-  constructor() {}
+  constructor() {
+    
+  }
   // icons
 
   // icons
   ngAfterContentChecked() {
-    if(this.swiper){
-      this.swiper.updateSwiper({});
-    }
+    // if(this.swiper){
+    //   this.swiper.updateSwiper({});
+    // }
   }
 
   afterInitSwiper(){
@@ -53,11 +55,6 @@ export class VistaComponent implements AfterContentChecked {
     console.log(swiper);
   }
   onSlideChange() {
-    const page = this.swiper.swiperRef.activeIndex
-    if(page===0){
-      this.swiperPageCero = true;
-    } else {
-      this.swiperPageCero = false;
-    }
+    
   }
 }
