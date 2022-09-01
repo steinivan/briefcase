@@ -179,13 +179,13 @@
                 h2{
                     font-size: 22px;
                 }
-                fa-icon{
+                div{
                     position: absolute;
                     right: 15px;
                     height: 100%;
                     font-size: 20px;
                     display: flex;
-                    width: 30px;
+                    gap:6px;
                     justify-content: center;
                     align-items: center;
                     align-content: center;
@@ -205,13 +205,13 @@
                 h2{
                     font-size: 22px;
                 }
-                fa-icon{
+                div{
                     position: absolute;
                     right: 15px;
                     height: 100%;
                     font-size: 20px;
                     display: flex;
-                    width: 30px;
+                    gap:6px;
                     justify-content: center;
                     align-items: center;
                     align-content: center;
@@ -232,13 +232,13 @@
                 h2{
                     font-size: 22px;
                 }
-                fa-icon{
+                div{
                     position: absolute;
                     right: 15px;
                     height: 100%;
                     font-size: 20px;
                     display: flex;
-                    width: 30px;
+                    gap:6px;
                     justify-content: center;
                     align-items: center;
                     align-content: center;
@@ -277,6 +277,18 @@
     align-items: center;
     align-content: center;
     color: #f44336;
+}
+.faSave{
+    position: absolute;
+    left: 15px;
+    height: 100%;
+    font-size: 20px;
+    display: flex;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: #00b818;
 }
 .onlyText{
     &:focus-visible{

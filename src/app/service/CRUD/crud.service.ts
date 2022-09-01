@@ -42,6 +42,9 @@ export class CrudService {
   public deleteLanguage(id:language):Observable<language>{
     return this.http.delete<language>(`${this.URL}/language/delete/` + id.id)
   }
+  public editLanguage(elem:language):Observable<language>{
+    return this.http.put<language>(`${this.URL}/language/edit/` + elem.id,elem)
+  }
   // accountArray:type[]
   // public viewType(){
   //   return this.http.get(`${this.URL}/type`)

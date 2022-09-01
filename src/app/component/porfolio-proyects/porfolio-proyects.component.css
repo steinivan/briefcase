@@ -4,6 +4,7 @@
 
 .swiper-slide{
     color: white;
+    user-select: none;
 }
 .swiperSlideProyectOne{
     display: flex;

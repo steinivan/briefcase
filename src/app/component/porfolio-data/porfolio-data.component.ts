@@ -1,4 +1,4 @@
-import {  AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild,  } from '@angular/core';
+import {  AfterViewInit, Component, ElementRef, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild,  } from '@angular/core';
 import { CrudService } from '../../service/CRUD/crud.service'
 import { faPen,faXmark,faCirclePlus,faCircleCheck, faCircleMinus, } from '@fortawesome/free-solid-svg-icons';
 import { type,language } from 'src/app/model/models';
@@ -8,7 +8,7 @@ import { keyClass } from './interface';
   templateUrl: './porfolio-data.component.html',
   styleUrls: ['./porfolio-data.component.scss']
 })
-export class PorfolioDataComponent implements OnInit{
+export class PorfolioDataComponent implements OnInit,OnChanges{
   
 
   public AcountAdmin:boolean=true;
@@ -34,13 +34,16 @@ export class PorfolioDataComponent implements OnInit{
   constructor(private crudService:CrudService,private renderer:Renderer2, elementR:ElementRef) { 
     this.crudService.getLanguage().subscribe(element=>{
       this.listLanguage = element;
-      this.orderList(this.listLanguage)
+      this.orderList()
     })
     this.crudService.getType().subscribe(element=>{this.listType = element})
   }
   ngOnInit():void{
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("no funca")
+    this.orderList()
+  }
   UppercaseOneLetter(str:string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -67,8 +70,11 @@ export class PorfolioDataComponent implements OnInit{
   cleanInputId(str:string){
     return str.replace(/[^a-zA-Z0-9]/g,"_")
   }
-  orderList(list:language[]): void {
+  orderList(): void {
     if(this.listLanguage){
+      this.otherList = []
+      this.webList = []
+      this.frameList = []
       this.listLanguage.forEach(element=>{
         if(element.type?.toLowerCase()==="web"){
           this.webList.push(element)
@@ -89,7 +95,12 @@ export class PorfolioDataComponent implements OnInit{
     this.addItemList(event.type,event.name)
   }
   saveEditItem(event:any){
-    console.log("item modificado: ",event)
+    this.listLanguage.forEach(elem=>{
+      if( this.cleanInput(elem.name.toLowerCase()) === this.cleanInput(event[1].toLowerCase())){
+        elem.name = event[0]
+        this.crudService.editLanguage(elem).subscribe()
+      }
+    })
   }
   // @ViewChild('SKILLSWEB') skillweb:ElementRef
   // @ViewChild('SKILLSFRAME') skillframe:ElementRef
@@ -138,9 +149,9 @@ export class PorfolioDataComponent implements OnInit{
       if(item.length>1){
         this.crudService.getType().subscribe(data => {
           const dataType = data.filter(elem=>{return elem.name.toLowerCase()===name.toLowerCase()});
-          this.crudService.postLanguage({"name":value},dataType[0].id).subscribe()
+          this.crudService.postLanguage({"name":value},dataType[0].id).subscribe(d => Element[name].push({id:d.id,name:d.name,type:d.type}))
         });
-        Element[name].push({"name":value,"type":name})
+        
       }
     }
 
@@ -163,10 +174,27 @@ export class PorfolioDataComponent implements OnInit{
     }
 
     deleteItem(name:string){
+      const Element:keyClass = {
+        "web" : this.webList,
+        "frame" : this.frameList,
+        "other" : this.otherList
+      }
       const item = document.getElementById(name.toLowerCase())
-      item?.remove()
+      this.listLanguage.forEach((elem,index) => {
+        if(elem.name===name){
+          this.listLanguage.splice(index,1)
+        }
+      })
+      if(item){
+        const nameItem = item?.classList[0].split('-')[1]
+        Element[nameItem].forEach((element:any,index:any) => {
+          if(element.name.toLowerCase()===name.toLowerCase())
+            Element[nameItem].splice(index,1)
+        });
+      }
+      // item?.remove()
       this.crudService.getLanguage().subscribe(data => {
-        const dataLanguage = data.filter(elem=>{return elem.name.toLowerCase()===name.toLowerCase()});
+        const dataLanguage = data.filter(elem=>{return elem.name.toLowerCase()===this.cleanInput(name.toLowerCase())});
         this.crudService.deleteLanguage(dataLanguage[0]).subscribe()
       });
     }
@@ -179,7 +207,7 @@ export class PorfolioDataComponent implements OnInit{
     // console.log(this.otherList)
     // console.log(this.webList)
     console.log("info Language: ", this.listLanguage)
-    console.log("info Type: ", this.listType)
+    console.log("info Type: ", this.otherList)
     console.log(this.addON)
   }
 

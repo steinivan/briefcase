@@ -59,7 +59,7 @@ export class CreateElementDirective implements AfterViewInit {
   }
   
   editMode(type:string,action?:any){
-    const containTitle = this.renderer.selectRootElement(`.section-presentation-skills-${this.name}`,true)
+    const containTitle = this.renderer.selectRootElement(`.${this.name}Div`,true)
     const icon = this.renderer.selectRootElement(`#${this.removeText(this.ref.nativeElement.id,'SKILLS')}Icon`,true)
     const iconCross = this.renderer.createElement('fa-icon');
     const iconSave = this.renderer.createElement('fa-icon');
@@ -94,14 +94,10 @@ export class CreateElementDirective implements AfterViewInit {
 
   createEdit(icon:any,title:any,iconCross:any){
     this.renderer.setProperty(icon,"innerHTML",this.iconAdd)
-    this.renderer.setStyle(icon,"right","25px")
-    
-    this.renderer.setStyle(iconCross,"right","3px")
     this.renderer.addClass(iconCross,`${this.name}IconCross`)
     this.clickCancelListen = this.renderer.listen(iconCross,"click",(event)=>{
       const itemList = document.querySelectorAll('.li-'+this.name)[0].children[0].id === 'input-create'
       this.eventEdit.emit(' ')
-      console.log("emitir faslo")
       this.saveStatus.saveStatus(false)
       if(itemList){
         this.editMode('create',"remove")
@@ -110,7 +106,6 @@ export class CreateElementDirective implements AfterViewInit {
     this.renderer.appendChild(title,iconCross)
     this.clickEditListen()
     this.clickEditListen = this.renderer.listen(icon,"click",(event)=>{
-      console.log("crear")
       this.editMode('create')
     })
   }
@@ -137,12 +132,10 @@ export class CreateElementDirective implements AfterViewInit {
       const inputItem = this.createLiInput()
       this.renderer.setProperty(icon,"innerHTML",this.iconSave)
       this.renderer.insertBefore(this.ref.nativeElement,inputItem,item)
-      console.log(inputItem,this.ref.nativeElement)
       this.clickEditListen()
       this.clickEditListen = this.renderer.listen(icon,"click",(event)=>{
         value = {name:this.renderer.selectRootElement('#input-create').value,type:this.name}
         this.editMode('save',value)
-        // this.saveInput.emit('true')
         this.saveStatus.saveStatus(true)
       })
     } else {
@@ -158,10 +151,12 @@ export class CreateElementDirective implements AfterViewInit {
     this.renderer.removeChild(this.ref.nativeElement,itemCreate)
     this.editMode('reset')
     this.dataEmit.emit(value)
+    this.eventEdit.emit(' ')
   }
   delete(value:any){
     const item = value.id
     this.deleteDataEmit.emit(item)
+
   }
   edit(icon:any,action:string){
     const itemList = document.querySelectorAll('.li-'+this.name)
@@ -183,17 +178,17 @@ export class CreateElementDirective implements AfterViewInit {
       }
     })
   }
+  
   resetEdit(icon:any,title:any){
     const iconCross = document.querySelector(`.${this.name}IconCross`)?this.renderer.selectRootElement(`.${this.name}IconCross`,true):null
     this.renderer.setProperty(icon,"innerHTML",this.iconEdit)
-    this.renderer.setStyle(icon,"right","16px")
     if(iconCross){
       this.clickEditListen()
       this.clickDeleteListen()
       this.clickCancelListen()
-      this.clickEmitName()
       this.editMode('edit','remove')
       this.renderer.removeChild(title,iconCross)
+      this.clickEmitName()
     } else {
       this.clickEditListen()
       this.clickEmitName()
