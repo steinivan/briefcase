@@ -14,6 +14,11 @@ import { PorfolioProyectsComponent } from './component/porfolio-proyects/porfoli
 import { PorfolioContactComponent } from './component/porfolio-contact/porfolio-contact.component';
 import { EditTextDirective } from './directive/edit-text.directive';
 import { CreateElementDirective } from './directive/create-element.directive';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './component/footer/footer.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +31,7 @@ import { CreateElementDirective } from './directive/create-element.directive';
     PorfolioContactComponent,
     EditTextDirective,
     CreateElementDirective,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +39,8 @@ import { CreateElementDirective } from './directive/create-element.directive';
     HttpClientModule,
     FontAwesomeModule,
     SwiperModule,
+    NoopAnimationsModule,
+    FormsModule, ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

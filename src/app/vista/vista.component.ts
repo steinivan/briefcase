@@ -20,6 +20,7 @@ export class VistaComponent implements AfterContentChecked {
     keyboard:true,
     mousewheel:false,
     updateOnImagesReady:true,
+    initialSlide:5,
     lazy: {
           loadPrevNext: true,
           loadPrevNextAmount:2,

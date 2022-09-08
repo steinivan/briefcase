@@ -1,0 +1,23 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .copyright{
+        width: 90%;
+        @media screen and (min-width:500px) {
+            width: 70%;
+        }
+        text-align: center;
+        color: rgb(172 187 187 / 54%);
+    }
+    .socialIcon{
+        display: flex;
+        gap:10px;
+        img{
+           height: 32px;
+           width: 32px; 
+        }
+    }
+}

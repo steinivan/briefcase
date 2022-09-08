@@ -1,8 +1,53 @@
-<p>porfolio-contact works!</p>
+<div class="section-contact" *ngIf="formulary===false">
+    <div class="section-contact-info">
+        <!-- <h3>ventana emergente de atribucion</h3>
+        <p>fondo de codigo : <a href="https://es.vecteezy.com/video/2015336-codigo-binario-con-numeros-moviendose-hacia-abajo-en-pantalla">fondo de codigo al comienzo de la pagina hecho por <span class="text-blue-500">Vecteezy</span></a></p> -->
+        <h2 class="text-4xl">Developer full stack</h2>
+    </div>
+    <div class="section-contact-me">
+        <div class="div-contain">
+            <button (click)="formState(true)" class="text-contact mb-0">Contact me</button>
+        </div>
+        <div class="section-contact-me_image">
+            <fa-icon class="" [icon]="iCamera"></fa-icon>
+        </div>
+        <hr class="hrImg">
+    </div>
+    <app-footer class="contactFooter"></app-footer>
+</div>
 
+<div class="section-contactForm" *ngIf="formulary===true">
+    <div class="section-contactForm-headerForm">
+        <fa-icon [icon]="iBack" (click)="formState(false)"></fa-icon>
+    </div>
+    <div class="section-contactForm-form">
+        <form [formGroup]="FormSubmit" (ngSubmit)="submitForm(FormSubmit.value)">
+            <h2>Contact</h2>
+            <div class="containInput">
+                <p>Nombre *<span *ngIf="formIf('name')">{{getError('name')}}</span></p>
+                <input [ngClass]="{errorClass : formIf('name') }" formControlName="name" type="text" >
+            </div>
+            <div class="containInput"> 
+                <p>Email <span *ngIf="formIf('email')">{{getError('email')}}</span></p>
+                <input [ngClass]="{errorClass : formIf('email') }" formControlName="email" type="email" >
+            </div>
+            <div class="containInput">
+                <p>Telefono <span *ngIf="formIf('phone')">{{getError('phone')}}</span></p>
+                <div class="flex">
+                    <p [ngClass]="{errorNumClass : formIf('phone') }" class="h-full bg-slate-300 numInput" name="" id="">+</p>
+                    <input class="inputPhone" [ngClass]="{errorPhoneClass : formIf('phone') }" formControlName="phone" type="number">
+                </div>
+            </div>
+            <div class="containInput">
+                <p>Mensaje <span *ngIf="formIf('message')">{{getError('message')}}</span></p>
+                <textarea formControlName="message" id="" cols="30" rows="4"></textarea>
+            </div>
+            <button class="buttonSubmit" type="submit">enviar</button>
+            <app-footer class="formFooter"></app-footer>
+        </form>
+    </div>
+</div>
+    
+<div *ngIf="formUpImg">
 
-
-<div>
-    <h3>ventana emergente de atribucion</h3>
-    <p>fondo de codigo : <a href="https://es.vecteezy.com/video/2015336-codigo-binario-con-numeros-moviendose-hacia-abajo-en-pantalla">fondo de codigo al comienzo de la pagina hecho por <span class="text-blue-500">Vecteezy</span></a></p>
 </div>
