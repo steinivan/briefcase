@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit,Renderer2,ViewChild,ElementRef } from '@angular/core';
 import { AbstractControl, FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
 import { faPen,faXmark,faCirclePlus,faCircleCheck, faCircleMinus, faArrowLeft, faCamera,faEllipsis } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -20,9 +20,11 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
   // icon
 
   formulary:boolean;
+  formUpImg:boolean=false;
   public FormSubmit:FormGroup = new FormGroup({});
   public formValidState:boolean=false;
-  constructor(private build:FormBuilder) {
+  public stateFormUpImage:boolean=false;
+  constructor(private build:FormBuilder, private renderer:Renderer2) {
     
    }
   
@@ -36,6 +38,7 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
     })
   }
   ngAfterViewInit(): void {
+    
   }
   get fm(){
     return this.FormSubmit.controls
@@ -101,6 +104,19 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
         control.setErrors(err); // controls got other errors so set them back
       }
     }
+  }
+  @ViewChild('iconCamera') iconCamera:ElementRef;
+  upImage(state:string){
+    if(state==='input'){
+      this.formUpImg = true;
+    } else { 
+
+      this.formUpImg = false;
+    }
+  }
+  updateImage(event:Event){
+    const inputFile = this.renderer.selectRootElement("#inputFile",true)
+    console.log(event,inputFile.files)
   }
   submitForm(value:any){
     const emailCondition = this.emailOrPhone();

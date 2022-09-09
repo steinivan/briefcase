@@ -44,7 +44,6 @@
                         <li id="{{cleanInputId(names.name.toLowerCase())}}" *ngIf="typeItem.name===names.type" class="relative {{'li-'+cleanInputId(names.type.toLowerCase())}}">
                             <input autocomplete="off" type="text" (saveInput)="saveEditItem($event)" appEditText='{{addON}}'  class="text-black text-center"
                             id="text-{{cleanInputId(names.name.toLowerCase())}}" value="{{cleanInput(names.name.toUpperCase())}}">
-                            <!-- id="text-{{cleanInputId(names.name.toLowerCase())}}-{{i}}" value="{{cleanInput(names.name.toUpperCase())}}"> -->
                         </li>
                     </ng-container>
                 </ng-container>

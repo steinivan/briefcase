@@ -1,5 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
 
+
+.section-upImg{
+}
+    .formUp{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(163, 163, 163);
+        height: 40%;
+        width: 50%;
+        min-height: 179px;
+        .formCross{
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0rem 1rem;
+            color: rgb(204, 14, 14);
+            font-size: 2rem;
+            z-index: 4;
+            fa-icon{
+                cursor: pointer;
+            }
+        }
+        .inputFileImg{
+            height: 70%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-bottom: 4rem;
+            z-index: 4;
+
+        }
+        .formButtons{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 4;
+
+            p{
+                width: 25%;
+                display: flex;
+                justify-content: center;
+                padding:1rem;
+                cursor: pointer;
+            }
+        }
+    }
+    .formUp::before{
+        content: '';
+        background-color: #00000087;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2;
+    }
 .section-contactForm{
     @media screen and (max-height:720px) {
         overflow-y: scroll;

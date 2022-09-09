@@ -1,4 +1,4 @@
-<div class="section-contact" *ngIf="formulary===false">
+<div  class="section-contact" *ngIf="formulary===false">
     <div class="section-contact-info">
         <!-- <h3>ventana emergente de atribucion</h3>
         <p>fondo de codigo : <a href="https://es.vecteezy.com/video/2015336-codigo-binario-con-numeros-moviendose-hacia-abajo-en-pantalla">fondo de codigo al comienzo de la pagina hecho por <span class="text-blue-500">Vecteezy</span></a></p> -->
@@ -9,11 +9,25 @@
             <button (click)="formState(true)" class="text-contact mb-0">Contact me</button>
         </div>
         <div class="section-contact-me_image">
-            <fa-icon class="" [icon]="iCamera"></fa-icon>
+            <fa-icon class="iconCamera" (click)="upImage('input')" [icon]="iCamera"></fa-icon>
         </div>
         <hr class="hrImg">
     </div>
     <app-footer class="contactFooter"></app-footer>
+
+</div>
+<div *ngIf="formUpImg" class="formUp">
+    <div class="formCross">
+        <fa-icon  (click)="upImage('exit')" [icon]="iconX"></fa-icon>
+    </div>
+    <div class="inputFileImg">
+        <img src="" alt="img">
+        <input type="file" name="" id="inputFile">
+    </div>
+    <div class="formButtons">
+        <p (click)="updateImage($event)">Subir imagen</p>
+        <p>Eliminar imagen</p>
+    </div>
 </div>
 
 <div class="section-contactForm" *ngIf="formulary===true">
@@ -46,8 +60,4 @@
             <app-footer class="formFooter"></app-footer>
         </form>
     </div>
-</div>
-    
-<div *ngIf="formUpImg">
-
 </div>
