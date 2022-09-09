@@ -2,9 +2,10 @@
     <!-- <app-header></app-header> -->
     <swiper #swiper
     [config]="config"
-    (slideChange)="onSlideChange()">
+    (slideChange)="onSlideChange()"
+    >
         <ng-template swiperSlide > 
-            <app-porfolio-data [swiperPageCero]="swiperPageCero" ></app-porfolio-data>
+            <app-porfolio-data></app-porfolio-data>
         </ng-template>
         <ng-template swiperSlide >
             <app-porfolio-description></app-porfolio-description>
@@ -20,25 +21,6 @@
         </ng-template>
     </swiper>
 
-    
-    <!-- <swiper #swiper [config]="config"
-    (slideChange)="onSlideChange()">
-        <ng-template swiperSlide  > 
-            <div class="h-full">
-                <p class=" text-red-300">Comodoro</p>
-            </div>
-        </ng-template>
-        <ng-template swiperSlide >
-            <div class="h-full">
-                <p>Comodoro</p>
-            </div>
-        </ng-template>
-        <ng-template swiperSlide>
-            <div class="h-full">
-                <p>Comodoro</p>
-            </div>
-        </ng-template>
-    </swiper> -->
 
     
     

@@ -15,6 +15,7 @@ body{
 
 .swiper-pagination{
   left: 20px;
+  width: min-content;
 }
 .swiper-pagination-bullet{
   border:thin solid white;
@@ -23,9 +24,9 @@ body{
   background-color: white;
 }
 
-.swiper-slide:nth-child(3){
+/* .swiper-slide:nth-child(3){
   padding: 0 6em;
-}
+} */
 
 
 

@@ -5,10 +5,25 @@
 
 }
 
-
 .section-presentation{
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
+    user-select: contain;
+        &-edit{
+            position: absolute;
+            right: 0;
+            top: 50vh;
+            font-size: 20px;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            z-index: 11;
+            transform: translate(0px, 40px);
+        }
         &-contain{
             height: 50%;
             width: 100%;
@@ -23,7 +38,8 @@
                 &__header{ 
                     width: 90%;
                     position: absolute;
-                    top: 88%;
+                    top: 50vh;
+                    transform: translate(0px, -50px);
                     display: flex;
                         &-figure {
                             height: 6rem;
@@ -54,7 +70,7 @@
                             width: 100%;
                             &-name{
                                 position: absolute;
-                                top: 12px;
+                                top: 8px;
                                 left: 0;
                                 margin-left: 0.5rem;
                                 display: flex;
@@ -73,18 +89,53 @@
                             }
                             &-occupation{
                                 position: absolute;
-                                bottom: 13px;
+                                bottom: 10px;
                                 left: 0;
                                 margin-left: 0.5rem;
                                 display: flex;
-                                p{
-                                    min-width: max-content;
-                                    color: rgb(177, 177, 177);
-                                }
-                                span{
+                                ul{
                                     font-weight: 500;
                                     font-size: 18px;
                                     color: rgb(139, 139, 139);
+                                    height: 27px;
+                                    overflow: hidden;
+                                    line-height: 27px;
+                                    li{
+                                        list-style:none;
+                                        animation:slide 9s steps(3) infinite;
+                                        position: relative;
+                                        top:0;
+                                        
+                                        @keyframes slide {
+                                            100%{
+                                                top:-80px;                                          
+                                            }
+                                        }
+                                        span{
+                                            position: relative;
+                                            margin:5px 0;
+                                            line-height: 27px;
+                                        }
+                                        span::after{
+                                            position: absolute;
+                                            content:"";
+                                            left:0;
+                                            height: 100%;
+                                            width: 100%;
+                                            background: #171717;
+                                            border-left:2px solid #16f37d;
+                                            animation:typing 3s steps(10) infinite;
+
+                                        }
+                                    }
+                                    @keyframes typing { 
+                                        40%, 60%{
+                                            left:calc(100% + 30px);
+                                        }
+                                        100%{
+                                            left:0;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -93,6 +144,165 @@
         &-skills{
             margin-top: 5rem;
             display: grid;
-            grid-template-columns: 50% 50%;
+            font-family: 'Montserrat', sans-serif;
+            justify-items: center;
+            justify-content: center;
+            grid-template-columns: repeat(1,1fr);
+            gap: 15px;
+            padding-bottom: 3rem;
+            ul:nth-last-child(1){
+                grid-column: span 1;
+            }
+            ul{
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                li{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    input{
+                        color: white;
+                        background-color: transparent;
+                    }
+                }
+            }
+            &-web{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 181px;
+                width: 100%;
+                position: relative;
+                grid-column-start: 1;
+                grid-row-start: 1;
+                border-top: 0.5px solid white;
+                border-bottom: 1px solid white;
+                h2{
+                    font-size: 22px;
+                }
+                div{
+                    position: absolute;
+                    right: 15px;
+                    height: 100%;
+                    font-size: 20px;
+                    display: flex;
+                    gap:6px;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                }
+            }
+            &-frame{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 216px;
+                width: 100%;
+                position: relative;
+                grid-column-start: 2;
+                grid-row-start: 1;
+                border-top: 0.5px solid white;
+                border-bottom: 1px solid white;
+                h2{
+                    font-size: 22px;
+                }
+                div{
+                    position: absolute;
+                    right: 15px;
+                    height: 100%;
+                    font-size: 20px;
+                    display: flex;
+                    gap:6px;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                }
+            }
+            &-other{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 181px;
+                width: 100%;
+                position: relative;
+                grid-column-start: 3;
+                grid-row-start: 1;
+                border-top: 0.5px solid white;
+                border-bottom: 1px solid white;
+                
+                h2{
+                    font-size: 22px;
+                }
+                div{
+                    position: absolute;
+                    right: 15px;
+                    height: 100%;
+                    font-size: 20px;
+                    display: flex;
+                    gap:6px;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                }
+            }
+            &-colFrame{
+                grid-column-start: 2;
+            }
+            &-colWeb{
+                grid-column-start: 1;
+            }
+            &-colOther{
+                grid-column-start: 3;
+            }
+            @media screen and (min-width:400px) {
+                grid-template-columns: repeat(2,1fr);
+                ul:nth-last-child(1){
+                    grid-column: span 2;
+                }
+            }
+            @media screen and (min-width:700px) {
+                grid-template-columns: repeat(3,1fr)!important;
+                ul:nth-last-child(1){
+                    grid-column: span 1;
+                }
+            }
         }
+}
+@media screen and (max-width:400px) {
+    #SKILLOTHER{
+        margin-bottom: 20px;
+    }
+}
+.faMinus{
+    position: absolute;
+    right: 15px;
+    height: 100%;
+    font-size: 20px;
+    display: flex;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: #f44336;
+}
+.faSave{
+    position: absolute;
+    left: 15px;
+    height: 100%;
+    font-size: 20px;
+    display: flex;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: #00b818;
+}
+.onlyText{
+    &:focus-visible{
+        outline: none;
+    }
+    cursor:default;
 }
