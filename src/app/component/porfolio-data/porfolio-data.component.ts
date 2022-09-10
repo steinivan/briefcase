@@ -102,40 +102,9 @@ export class PorfolioDataComponent implements OnInit,OnChanges{
       }
     })
   }
-  // @ViewChild('SKILLSWEB') skillweb:ElementRef
-  // @ViewChild('SKILLSFRAME') skillframe:ElementRef
-  // @ViewChild('SKILLSOTHER') skillother:ElementRef
-  // @ViewChild('inputSkill') inputSkill:ElementRef
     addItem(name:string):void{
       const oneLetter = this.UppercaseOneLetter(name)
       const inputS = document.getElementById('inputSkill'+ oneLetter)
-      
-      // if(this.addON===name){
-      //   const ele = inputS?.querySelector('input')?.value;
-      //   this.moveList(name,'resta')
-      //   this.addON= '';
-      //   if(ele!=='' && ele){
-      //     this.addItemList(name,ele);
-      //   }
-      // } else{
-        
-      //   if(this.addON!==name && this.addON!==''){
-      //     this.moveList(this.addON,'resta')
-      //     this.addON= name;
-      //     this.moveList(name,'suma')
-      //   } else {
-      //     this.addON= name;
-      //     this.moveList(name,'suma')
-      //   }
-        // window.addEventListener("keypress",function(event){
-        //   console.log(event.key,event.key==="Enter")
-        //   if(event.key==="Enter"){
-        //     const item = document.getElementById("iconSave" + oneLetter );
-        //     item?.click();
-        //     console.log("sigue funcionando")
-        //   }
-        // },true)
-      // }
       
     }
 
@@ -192,7 +161,6 @@ export class PorfolioDataComponent implements OnInit,OnChanges{
             Element[nameItem].splice(index,1)
         });
       }
-      // item?.remove()
       this.crudService.getLanguage().subscribe(data => {
         const dataLanguage = data.filter(elem=>{return elem.name.toLowerCase()===this.cleanInput(name.toLowerCase())});
         this.crudService.deleteLanguage(dataLanguage[0]).subscribe()
@@ -200,15 +168,6 @@ export class PorfolioDataComponent implements OnInit,OnChanges{
     }
   changeEdit(){
     this.editMode = !this.editMode;
-  }
-  info(){
-    // this.crudService.getLanguage().subscribe(el=>console.log(el))
-    // console.log(this.listLanguage)
-    // console.log(this.otherList)
-    // console.log(this.webList)
-    console.log("info Language: ", this.listLanguage)
-    console.log("info Type: ", this.otherList)
-    console.log(this.addON)
   }
 
 }

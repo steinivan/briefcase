@@ -21,8 +21,10 @@
         <fa-icon  (click)="upImage('exit')" [icon]="iconX"></fa-icon>
     </div>
     <div class="inputFileImg">
-        <img src="" alt="img">
-        <input type="file" name="" id="inputFile">
+        <div>
+            <img src="" alt="img" id="imagePrevisualizacion">
+        </div>
+        <input (change)="changeF($event)" type="file" name="" id="inputFile">
     </div>
     <div class="formButtons">
         <p (click)="updateImage($event)">Subir imagen</p>
@@ -31,12 +33,12 @@
 </div>
 
 <div class="section-contactForm" *ngIf="formulary===true">
-    <div class="section-contactForm-headerForm">
-        <fa-icon [icon]="iBack" (click)="formState(false)"></fa-icon>
-    </div>
     <div class="section-contactForm-form">
         <form [formGroup]="FormSubmit" (ngSubmit)="submitForm(FormSubmit.value)">
-            <h2>Contact</h2>
+            <div class="section-contactForm-headerForm">
+                <h2>Contact</h2>
+                <fa-icon [icon]="iBack" (click)="formState(false)"></fa-icon>
+            </div>
             <div class="containInput">
                 <p>Nombre *<span *ngIf="formIf('name')">{{getError('name')}}</span></p>
                 <input [ngClass]="{errorClass : formIf('name') }" formControlName="name" type="text" >

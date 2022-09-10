@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component, HostListener, ViewChild, ViewEncapsulation } from '@angular/core';
 import {SwiperComponent} from 'swiper/angular'
 import  { SwiperOptions} from 'swiper';
 import SwiperCore,{Pagination,Mousewheel,Keyboard,Lazy} from 'swiper'
@@ -20,7 +20,7 @@ export class VistaComponent implements AfterContentChecked {
     keyboard:true,
     mousewheel:false,
     updateOnImagesReady:true,
-    initialSlide:5,
+    initialSlide:0,
     lazy: {
           loadPrevNext: true,
           loadPrevNextAmount:2,
@@ -33,6 +33,7 @@ export class VistaComponent implements AfterContentChecked {
     },
     resistanceRatio:0,
     };
+    
   constructor() {
     
   }
@@ -44,11 +45,34 @@ export class VistaComponent implements AfterContentChecked {
     //   this.swiper.updateSwiper({});
     // }
   }
-
+  @HostListener('window:scroll',['$event'])
+  scrollListener(event:Event){
+    console.log(event)
+  }
   afterInitSwiper(){
     console.log(this.swiper.swiperRef.activeIndex);
   };
-
+  changeIndexPage(event:String){
+    switch (event) {
+      case 'index':
+        this.swiper.swiperRef.slideTo(0)
+        break;
+      case 'aboutMe':
+        this.swiper.swiperRef.slideTo(1)
+        break;
+      case 'service':
+        this.swiper.swiperRef.slideTo(2)
+        break;
+      case 'projects':
+        this.swiper.swiperRef.slideTo(3)
+        break;
+      case 'contact':
+        this.swiper.swiperRef.slideTo(4)
+        break;
+      default:
+        break;
+    }
+  }
   ThisNext(){
     this.swiper.swiperRef.slideNext(1000)
   }

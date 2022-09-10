@@ -17,7 +17,8 @@
         background-color: rgb(163, 163, 163);
         height: 40%;
         width: 50%;
-        min-height: 179px;
+        min-width: 320px;
+        min-height: 314px;
         .formCross{
             position: absolute;
             top: 0;
@@ -25,7 +26,7 @@
             padding: 0rem 1rem;
             color: rgb(204, 14, 14);
             font-size: 2rem;
-            z-index: 4;
+            z-index: 10;
             fa-icon{
                 cursor: pointer;
             }
@@ -38,7 +39,18 @@
             justify-content: flex-end;
             margin-bottom: 4rem;
             z-index: 4;
-
+            div{
+                height: 80%;
+                width: 90%;
+                object-fit: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img{
+                    height: 80%;
+                    width: 60%;
+                }
+            }
         }
         .formButtons{
             position: absolute;
@@ -47,11 +59,12 @@
             display: flex;
             justify-content: space-around;
             z-index: 4;
-
             p{
                 width: 25%;
                 display: flex;
                 justify-content: center;
+                min-width: max-content;
+                align-items: center;
                 padding:1rem;
                 cursor: pointer;
             }
@@ -76,11 +89,14 @@
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     &-headerForm{
-        position: absolute;
-        top: 0;
-        left: 0%;
         display: flex;
+        width: 100%;
+        justify-content: center;
+        position: relative;
         fa-icon{
+            position: absolute;
+            top: 0;
+            left: 0%;
             padding: 0.5rem 1rem;
             color:#3ab8b0;
             font-size: 1.5rem;
@@ -101,8 +117,12 @@
             gap:20px;
             width: 70%;
             max-width: 668px;
+            min-width: 250px;
             min-height: 661px;
             margin-top: 1rem;
+            @media screen and (max-height:740px){
+                margin-top:3rem;
+            }
             justify-content: center;
             align-items: center;
             .containInput{
@@ -264,11 +284,14 @@
             overflow-y: scroll;
         }
         &-headerForm{
-            position: absolute;
-            top: 0;
-            left: 0%;
-            display: flex;
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                position: relative;
             fa-icon{
+                position: absolute;
+                top: 0;
+                left: 0%;
                 padding: 0.5rem 1rem;
                 color:#3ab8b0;
                 font-size: 1.5rem;
@@ -289,8 +312,12 @@
                 gap:20px;
                 width: 70%;
                 max-width: 668px;
+                min-width: 250px;
                 min-height: 661px;
                 margin-top: 1rem;
+                @media screen and (max-height:740px){
+                    margin-top:3rem;
+                }
                 justify-content: center;
                 align-items: center;
                 .containInput{
@@ -463,11 +490,14 @@
             }
         }
         &-headerForm{
-                position: absolute;
-                top: 0;
-                left: 0%;
                 display: flex;
+                width: 100%;
+                justify-content: center;
+                position: relative;
                 fa-icon{
+                    position: absolute;
+                    top: 0;
+                    left: 0%;
                     padding: 0.5rem 1rem;
                     color:#3ab8b0;
                     font-size: 1.5rem;
@@ -489,7 +519,11 @@
                     width: 70%;
                     max-width: 668px;
                     min-height: 661px;
+                    min-width: 250px;
                     margin-top: 1rem;
+                    @media screen and (max-height:740px){
+                        margin-top:3rem;
+                    }
                     justify-content: center;
                     align-items: center;
                     .containInput{

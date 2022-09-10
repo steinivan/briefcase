@@ -118,6 +118,17 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
     const inputFile = this.renderer.selectRootElement("#inputFile",true)
     console.log(event,inputFile.files)
   }
+  changeF(event:Event){
+    const file = this.renderer.selectRootElement('#inputFile',true).files
+    const image = this.renderer.selectRootElement('#imagePrevisualizacion',true)
+    if (!file || !file.length) {
+      image.src = "";
+      return;
+    }
+    const fileOne = file[0]
+    const objectUrl = URL.createObjectURL(fileOne)
+    image.src = objectUrl;
+  }
   submitForm(value:any){
     const emailCondition = this.emailOrPhone();
     if(this.FormSubmit.valid && emailCondition){

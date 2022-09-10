@@ -1,5 +1,32 @@
 <header>
-    <nav>
-        <h1>Stein ivan</h1>
+    <nav class="nav">
+        <div class="nav-pages">
+            <p (click)="outputIndex('index','full')">Inicio</p>
+            <p (click)="outputIndex('aboutMe','full')">Sobre mi</p>
+            <p (click)="outputIndex('service','full')">Servicios</p>
+            <p (click)="outputIndex('projects','full')">Proyectos</p>
+            <p (click)="outputIndex('contact','full')">Contacto</p>
+        </div>
+        <div class="nav-languages">
+            <p>ingles</p>
+            <p> | </p>
+            <p>español</p>
+        </div>
+        <div  class="nav-movilBar">
+            <fa-icon class="iconBar" (click)="changeDropdown()" [icon]="iBar"></fa-icon>
+            <div class="nav-dropdown">
+                <p (click)="outputIndex('index','movil')">Inicio</p>
+                <p (click)="outputIndex('aboutMe','movil')">Sobre mi</p>
+                <p (click)="outputIndex('service','movil')">Servicios</p>
+                <p (click)="outputIndex('projects','movil')">Proyectos</p>
+                <p (click)="outputIndex('contact','movil')">Contacto</p>
+                <div class="nav-dropdown__languages">
+                    <p>ingles</p>
+                    <p> | </p>
+                    <p>español</p>
+                </div>
+                <fa-icon (click)="changeDropdown()" class="iconCrossDropdown" [icon]="iCross"></fa-icon>
+            </div>
+        </div>
     </nav>
 </header>

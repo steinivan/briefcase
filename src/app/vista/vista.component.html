@@ -1,5 +1,5 @@
 
-    <!-- <app-header></app-header> -->
+    <app-header (indexPage)="changeIndexPage($event)" ></app-header>
     <swiper #swiper
     [config]="config"
     (slideChange)="onSlideChange()"
@@ -8,7 +8,7 @@
             <app-porfolio-data></app-porfolio-data>
         </ng-template>
         <ng-template swiperSlide >
-            <app-porfolio-description></app-porfolio-description>
+            <app-porfolio-description ></app-porfolio-description>
         </ng-template>
         <ng-template swiperSlide>
             <app-porfolio-service (next)='ThisNext()'></app-porfolio-service>
