@@ -1,17 +1,22 @@
-import {  AfterViewInit, Component, ElementRef, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild,  } from '@angular/core';
+import {  AfterViewInit,AfterContentInit ,EventEmitter, Component, ElementRef, Input, Output , OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild,  } from '@angular/core';
 import { CrudService } from '../../service/CRUD/crud.service'
 import { faPen,faXmark,faCirclePlus,faCircleCheck, faCircleMinus, } from '@fortawesome/free-solid-svg-icons';
 import { type,language } from 'src/app/model/models';
 import { keyClass } from './interface';
+import SwiperCore,{Pagination,Mousewheel,Keyboard,Lazy,Scrollbar} from 'swiper'
+import {SwiperComponent} from 'swiper/angular'
+import { Observable } from 'rxjs';
+
+SwiperCore.use([Pagination,Mousewheel,Keyboard,Lazy,Scrollbar])
+
 @Component({
   selector: 'app-porfolio-data',
   templateUrl: './porfolio-data.component.html',
   styleUrls: ['./porfolio-data.component.scss']
 })
-export class PorfolioDataComponent implements OnInit,OnChanges{
+export class PorfolioDataComponent implements OnInit,OnChanges, AfterViewInit{
   
 
-  public AcountAdmin:boolean=true;
   public editMode:boolean=false;
   public addON:string='';
 
@@ -21,7 +26,8 @@ export class PorfolioDataComponent implements OnInit,OnChanges{
   public webList:language[]=[];
   public frameList:language[]=[];
   public typeId:type[];
-
+  
+  @Input() AcountAdmin:boolean;
   public listTypeLanguage:any=[this.webList,this.frameList,this.otherList]
   // icon
   iconEdit=faPen;
@@ -32,16 +38,21 @@ export class PorfolioDataComponent implements OnInit,OnChanges{
   // icon
   
   constructor(private crudService:CrudService,private renderer:Renderer2, elementR:ElementRef) { 
+  }
+  @ViewChild('swiper') swiper:SwiperComponent;
+  ngOnInit():void{
+  }
+  initListType(){
+    this.crudService.getType().subscribe(element=>{this.listType = element})
     this.crudService.getLanguage().subscribe(element=>{
       this.listLanguage = element;
       this.orderList()
     })
-    this.crudService.getType().subscribe(element=>{this.listType = element})
   }
-  ngOnInit():void{
+  ngAfterViewInit():void{
+    this.initListType()
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("no funca")
     this.orderList()
   }
   UppercaseOneLetter(str:string) {

@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, OnInit,Renderer2,ViewChild,ElementRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit,Renderer2,ViewChild,ElementRef, Input } from '@angular/core';
 import { AbstractControl, FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
 import { faPen,faXmark,faCirclePlus,faCircleCheck, faCircleMinus, faArrowLeft, faCamera,faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { ImageModel } from 'src/app/model/models';
+import { CrudService } from 'src/app/service/CRUD/crud.service';
 @Component({
   selector: 'app-porfolio-contact',
   templateUrl: './porfolio-contact.component.html',
@@ -16,7 +18,8 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
   iSave=faCircleCheck;
   iBack = faArrowLeft;
   iCamera = faCamera;
-  iEllipsis = faEllipsis
+  iEllipsis = faEllipsis;
+  
   // icon
 
   formulary:boolean;
@@ -24,11 +27,14 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
   public FormSubmit:FormGroup = new FormGroup({});
   public formValidState:boolean=false;
   public stateFormUpImage:boolean=false;
-  constructor(private build:FormBuilder, private renderer:Renderer2) {
+  public imagenUrl:string | ArrayBuffer;
+  @Input() AcountAdmin:boolean;
+  constructor(private build:FormBuilder, private renderer:Renderer2, private crud:CrudService) {
     
    }
   
   ngOnInit(): void {
+    this.crud.findImage('contact').subscribe(x => this.imagenUrl = x[0].url)
     this.formState(false);
     this.FormSubmit = this.build.group({
       name: new FormControl ('',[Validators.required,Validators.minLength(2)]),
@@ -114,9 +120,28 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
       this.formUpImg = false;
     }
   }
-  updateImage(event:Event){
-    const inputFile = this.renderer.selectRootElement("#inputFile",true)
-    console.log(event,inputFile.files)
+  convertUri(event:any) {
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      reader.result ? this.imagenUrl = reader.result : null;
+    };
+    reader.onerror = (event: any) => {
+      console.log("File could not be read: " + event.target.error.code);
+    };
+    reader.readAsDataURL(event);
+  }
+  @ViewChild('fileImage') fileImage:ElementRef;
+  updateImage(){
+    this.fileImage.nativeElement.files[0];
+    let section = {name:"contact"};
+    let formData = new FormData();
+    const image:File = this.fileImage.nativeElement.files[0];
+    formData.append("section",JSON.stringify(section));
+    formData.append("file",image);
+    formData.get("file")
+    this.convertUri(this.fileImage.nativeElement.files[0])
+    this.crud.updateImage(formData).subscribe();
+    this.upImage("exit");
   }
   changeF(event:Event){
     const file = this.renderer.selectRootElement('#inputFile',true).files
@@ -133,6 +158,7 @@ export class PorfolioContactComponent implements OnInit,AfterViewInit {
     const emailCondition = this.emailOrPhone();
     if(this.FormSubmit.valid && emailCondition){
       const json = JSON.stringify(this.FormSubmit.value)
+      this.crud.sendEmail(this.FormSubmit.value).subscribe()
       this.FormSubmit.reset();
       this.formState(false)
     } else {

@@ -20,4 +20,17 @@ footer{
            width: 32px; 
         }
     }
+    .iconEmail{
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        fa-icon{
+            color: black;
+            font-size: 20px;
+        }
+    }
 }

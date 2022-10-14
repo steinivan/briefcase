@@ -17,8 +17,10 @@ import { CreateElementDirective } from './directive/create-element.directive';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './component/footer/footer.component';
-
-
+import { PorfolioLoginComponent } from './component/porfolio-login/porfolio-login.component'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerModule } from './component/spinner/spinner.module';
+import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +34,7 @@ import { FooterComponent } from './component/footer/footer.component';
     EditTextDirective,
     CreateElementDirective,
     FooterComponent,
+    PorfolioLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +44,11 @@ import { FooterComponent } from './component/footer/footer.component';
     SwiperModule,
     NoopAnimationsModule,
     FormsModule, ReactiveFormsModule,
+    SpinnerModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS,useClass:SpinnerInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

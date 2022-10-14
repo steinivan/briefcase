@@ -9,7 +9,10 @@
             <button (click)="formState(true)" class="text-contact mb-0">Contact me</button>
         </div>
         <div class="section-contact-me_image">
-            <fa-icon class="iconCamera" (click)="upImage('input')" [icon]="iCamera"></fa-icon>
+            <div>
+                <img src="{{imagenUrl ? imagenUrl : null }}" alt="imagePerfil">
+            </div>
+            <fa-icon *ngIf="AcountAdmin" class="iconCamera" (click)="upImage('input')" [icon]="iCamera"></fa-icon>
         </div>
         <hr class="hrImg">
     </div>
@@ -22,14 +25,14 @@
     </div>
     <div class="inputFileImg">
         <div>
-            <img src="" alt="img" id="imagePrevisualizacion">
+            <img class="rounded-full" src="{{imagenUrl ? imagenUrl : null }}" alt="img" id="imagePrevisualizacion">
         </div>
-        <input (change)="changeF($event)" type="file" name="" id="inputFile">
+            <input #fileImage (change)="changeF($event)" type="file" name="file" id="inputFile">
     </div>
-    <div class="formButtons">
-        <p (click)="updateImage($event)">Subir imagen</p>
-        <p>Eliminar imagen</p>
-    </div>
+        <div class="formButtons">
+            <button (click)="updateImage()">Subir imagen</button>
+            <p>Eliminar imagen</p>
+        </div>
 </div>
 
 <div class="section-contactForm" *ngIf="formulary===true">

@@ -1,23 +1,21 @@
 <swiper #swiper
     [config]="config"
+    
     (slideChange)="changeProyectSlide()"
     >
         <ng-template swiperSlide class="swiperSlideProyectOne"> 
-            <div class="w-[95%]">
-                <h2 class="swiperSlideCoffeH2 cursor-pointer" (click)="redirectPage('coffe')">Coffe Proyect</h2>
-                <div class="h-[90vh] w-full max-h-[90vh]">
-                    <img class="object-scale-down h-full w-full" src="../../../assets/proyectCoffe.png" alt="">
+        <div class="w-[95%]">
+            <div class="h-[90vh] w-full max-h-[90vh]">
+                <img class="object-scale-down h-full w-full" src="../../../assets/proyectCoffe.png" alt="">
                 </div>
             </div>
         </ng-template>
-        <ng-template swiperSlide > 
-            <h2 class="swiperSlideBookFlixH2 cursor-pointer" (click)="redirectPage('bookflix')">BookFlix Proyect</h2>
+        <ng-template swiperSlide >
             <div class="h-full w-full flex items-end">
                 <img class="object-scale-down h-[95%] w-full" src="../../../assets/BookFlixProyect.png" alt="">
             </div>
         </ng-template>
         <ng-template swiperSlide > 
-            <h2 class="swiperSlideNarutoH2 cursor-pointer" (click)="redirectPage('naruto')">Naruto Game Card Proyect</h2>
             <div class="h-full w-full flex items-end">
                 <img class="object-fill h-[95%] w-full" *ngIf="sizeDisplay==='web' && !conditionWebNarutoSize()" src="../../../assets/narutoProyect.png" alt="">
                 <img class="object-fill h-[95%] w-full" *ngIf="sizeDisplay==='phone'" src="../../../assets/narutoProyect-2.png" alt="">
@@ -26,7 +24,6 @@
             </div>
         </ng-template>
         <ng-template swiperSlide > 
-            <h2 class="swiperSlideShiplandH2 cursor-pointer" (click)="redirectPage('shipland')">Shipland</h2>
             <div class="h-full w-full flex items-end">
                 <img class="object-fill h-[95%] w-[100%]" *ngIf="sizeDisplay==='phone'" src="../../../assets/shiplandProyect-1.png" alt="">
                 <img class="object-fill h-[95%] w-[50%]" *ngIf="sizeDisplay!=='phone'" src="../../../assets/shiplandProyect-1.png" alt="">
@@ -39,4 +36,7 @@
     </div>
     <div #nextProyect class="swiper-buttonCustom-next cursor-pointer" (click)="next()">
         <fa-icon [icon]="changeViewIconR" ></fa-icon>
+    </div>
+    <div class="titleProyect">
+        <h2 #nameProyects class="swiperSlideCoffeH2 cursor-pointer" (click)="redirectPage()">{{nameProyectI}}</h2>
     </div>

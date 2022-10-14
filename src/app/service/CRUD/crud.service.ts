@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
-import { type,language } from 'src/app/model/models';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, retry, throwError } from 'rxjs';
+import { type,language,user,ImageModel } from 'src/app/model/models';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +21,8 @@ export class CrudService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
   public postId:any;
-  private URL='http://localhost:8080/api'
+  private URL='https://backend-briefcase.herokuapp.com/api'
+  // private URL='http://localhost:8080/api' 
   private listLanguage:language[]=[];
   private listType:type[]=[]
   constructor(private http:HttpClient) {
@@ -45,8 +46,19 @@ export class CrudService {
   public editLanguage(elem:language):Observable<language>{
     return this.http.put<language>(`${this.URL}/language/edit/` + elem.id,elem)
   }
-  // accountArray:type[]
-  // public viewType(){
-  //   return this.http.get(`${this.URL}/type`)
-  // }
+  public login(elem:user){
+    const user = this.http.post<user>(`${this.URL}/auth/signin`,elem);
+    return user.pipe(retry(1))
+  }
+
+  public updateImage(elem:any){
+    return this.http.post<String>(`${this.URL}/image/upload`,elem);
+  }
+  public findImage(elem:String):Observable<ImageModel[]>{
+    return this.http.get<ImageModel[]>(`${this.URL}/image/find`);
+    // return this.http.get<any>(`${this.URL}/image/find/${elem}`);
+  }
+  public sendEmail(elem:any){
+    return this.http.post<any>(`${this.URL}/email/send`,elem);
+  }
 }

@@ -1,11 +1,13 @@
 
-    <app-header (indexPage)="changeIndexPage($event)" ></app-header>
+    <app-spinner></app-spinner>
+    <app-header [login]="login" (indexPage)="changeIndexPage($event)" ></app-header>
     <swiper #swiper
     [config]="config"
     (slideChange)="onSlideChange()"
     >
+    
         <ng-template swiperSlide > 
-            <app-porfolio-data></app-porfolio-data>
+        <app-porfolio-data [AcountAdmin]="login" ></app-porfolio-data>
         </ng-template>
         <ng-template swiperSlide >
             <app-porfolio-description ></app-porfolio-description>
@@ -17,10 +19,9 @@
             <app-porfolio-proyects></app-porfolio-proyects>
         </ng-template>
         <ng-template swiperSlide>
-            <app-porfolio-contact></app-porfolio-contact>
+            <app-porfolio-contact [AcountAdmin]="login"></app-porfolio-contact>
         </ng-template>
     </swiper>
-
 
     
     

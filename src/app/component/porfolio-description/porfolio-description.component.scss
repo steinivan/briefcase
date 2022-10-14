@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300&family=Montserrat:wght@300;400&display=swap');
+
 
     .section-description{
         height: 100%;
@@ -7,22 +8,27 @@
         justify-content: center;
         align-items: center;
         user-select: none;
+        max-height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
         &-contain{
             width: 100%;
             height: 100%;
+            max-height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             p{
-                font-family: 'Montserrat', sans-serif;
+                font-family: 'Crimson Pro', serif;
                 color: white;
-                font-weight: 500;
+                font-weight: 300;
+                font-size: 22px;
             }
             
             h3{
                 font-family: 'Montserrat', sans-serif;
                 width: 100%;
-                font-size: 22px;
+                font-size: 32px;
                 color: rgba(92, 92, 92, 0.966);
                 font-weight: 800;
                 margin-top: 3rem;
@@ -33,28 +39,27 @@
                 &__divContainerImg{
                     display: flex;
                     width: 100vw;
-                    height: 100%;
-                    min-height: 606px;
+                    height: calc(120vw - -98px);
                     position: relative;
                     justify-content: space-between;
                         div{
-                            height: 50vw;
+                            height: 30vw;
                         }
                         &-divMascota{
                             width: 50vw;
                             display: flex;
                             position: absolute;
-                            justify-content: end;
+                            justify-content: flex-end;
                             right: 0;
-                            top: 36vw;
+                            top: 23vw;
                         }
                         &-divPerson{
                             width: 50vw;
                             display: flex;
-                            justify-content: start;
+                            justify-content: flex-start;
                             position: absolute;
                             right: 0;
-                            top: 101vw;
+                            top: 64vw;
                             transform: translate(0px, 0px);
                             
                         }
@@ -62,240 +67,18 @@
                             object-fit: fill;
                             width: 65vw;
                             display: flex;
-                            justify-content: start;
+                            justify-content: flex-start;
                         }
                         &-divStudy{
                             width: 65vw;
                             display: flex;
                             position: absolute;
-                            justify-content: start;
+                            justify-content: flex-start;
                             right: 0;
                             left: 0;
-                            top: 71vw;
+                            top: 45vw;
                             object-fit: cover;
                         }
                 }
         }
     }
-        @media screen and (max-height:800px) {
-            .section-description{
-                max-height: 100%;
-                overflow-y: scroll;
-                &-contain{
-                    max-height: 100%;
-                    &__divContainerImg{
-                        
-                    }
-                }
-            }
-        }
-
-    @media screen and (min-width:425px) {
-        .section-description{
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            user-select: none;
-            &-contain{
-                width: 70%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                p{
-                    font-family: 'Montserrat', sans-serif;
-                    color: white;
-                    font-weight: 500;
-                }
-                
-                h3{
-                    font-family: 'Montserrat', sans-serif;
-                    width: 100%;
-                    font-size: 22px;
-                    color: rgba(92, 92, 92, 0.966);
-                    font-weight: 800;
-                }
-                    &__descriptText{
-                        margin-bottom: 2rem;
-                    }
-                    &__divContainerImg{
-                        display: flex;
-                        width: 100vw;
-                        height: 46vh;
-                        position: relative;
-                        justify-content: space-between;
-                            div{
-                                height: 24vw;
-                            }
-                            &-divMascota{
-                                width: 35vw;
-                                display: flex;
-                                position: absolute;
-                                justify-content: end;
-                                left: 25vw;
-                                top: 18vw;
-                            }
-                            &-divPerson{
-                                width: 35vw;
-                                display: flex;
-                                justify-content: end;
-                                top: auto;
-                                transform: translate(0px, 18vw);
-                                position: relative;
-                            }
-                            &-divWebsite{
-                                object-fit: fill;
-                                width: 40vw;
-                                display: flex;
-                                justify-content: start;
-                            }
-                            &-divStudy{
-                                width: 40vw;
-                                display: flex;
-                                position: absolute;
-                                justify-content: start;
-                                right: 10vw;
-                                left: auto;
-                                top: 0px;
-                                object-fit: cover;
-                            }
-                    }
-            }
-        }
-    }
-
-   
-    // @media screen and (min-width:500px) {
-    //     .section-description{
-    //         height: 100%;
-    //         width: 100%;
-    //         display: flex;
-    //         justify-content: center;
-    //         align-items: center;
-    //         &-contain{
-    //             width: 70%;
-    //             display: flex;
-    //             flex-direction: column;
-    //             align-items: center;
-    //             p{
-    //                 font-family: 'Montserrat', sans-serif;
-    //                 color: white;
-    //                 font-weight: 500;
-    //             }
-    //             h3{
-    //                 font-family: 'Montserrat', sans-serif;
-    //                 width: 100%;
-    //                 font-size: 22px;
-    //                 color: rgba(92, 92, 92, 0.966);
-    //                 font-weight: 800;
-    //             }
-    //                 &__divContainerImg{
-    //                     display: flex;
-    //                     width: 100vw;
-    //                     height: 80vh;
-    //                     position: relative;
-    //                         div{
-    //                             height: 35vw;
-    //                             position: absolute;
-    //                         }
-    //                         &-divMascota{
-    //                             width: 45vw;
-    //                             background-image: url('../../../assets/mascota.jpeg');
-    //                             background-size: cover;
-    //                             background-repeat: no-repeat;
-    //                             background-position: bottom left;
-    //                             top: 20vw;
-    //                             right:0;
-    //                         }
-    //                         &-divWebsite{
-    //                             object-fit: fill;
-    //                             width: 60vw;
-    //                             left: 0;
-    //                             top: 0%;
-    //                         }
-    //                         &-divStudy{
-    //                             width: 60vw;
-    //                             object-fit: cover;
-    //                             top: 43vw;
-    //                             left: 0rem;
-    //                         }
-    //                         &-divPerson{
-    //                             width: 45vw;
-    //                             background-color: red;
-    //                             background-size: cover;
-    //                             background-repeat: no-repeat;
-    //                             background-position: bottom left;
-    //                             top: 63vw;
-    //                             right: 0;
-    //                         }
-    //                 }
-    //         }
-    //     }
-    // }
-    // @media screen and (min-width:640px){
-    //     .section-description{
-    //         height: 100%;
-    //         width: 100%;
-    //         display: flex;
-    //         justify-content: center;
-    //         align-items: center;
-    //         &-contain{
-    //             width: 70%;
-    //             display: flex;
-    //             flex-direction: column;
-    //             align-items: center;
-    //             p{
-    //                 font-family: 'Montserrat', sans-serif;
-    //                 color: white;
-    //                 font-weight: 500;
-    //             }
-    //             h3{
-    //                 font-family: 'Montserrat', sans-serif;
-    //                 width: 100%;
-    //                 font-size: 22px;
-    //                 color: rgba(92, 92, 92, 0.966);
-    //                 font-weight: 800;
-    //             }
-    //                 &__divContainerImg{
-    //                     display: flex;
-    //                     width: 560px;
-    //                     height: 40rem;
-    //                     position: relative;
-    //                         div{
-    //                             height: 15rem;
-    //                         }
-    //                         &-divMascota{
-    //                             width: 15rem;
-    //                             background-image: url('../../../assets/mascota.jpeg');
-    //                             background-size: cover;
-    //                             background-repeat: no-repeat;
-    //                             background-position: bottom left;
-    //                             top: 116px;
-    //                             left: 20rem;
-    //                         }
-    //                         &-divWebsite{
-    //                             object-fit: fill;
-    //                             width: 22rem;
-    //                             left: 0;
-    //                             top: 0%;
-    //                         }
-    //                         &-divStudy{
-    //                             width: 22rem;
-    //                             object-fit: cover;
-    //                             top: 266px;
-    //                             left: 0rem;
-    //                         }
-    //                         &-divPerson{
-    //                             width: 15rem;
-    //                             background-color: red;
-    //                             background-size: cover;
-    //                             background-repeat: no-repeat;
-    //                             background-position: bottom left;
-    //                             top: 380px;
-    //                             right: 0;
-    //                         }
-    //                 }
-    //         }
-    //     }
-    // }

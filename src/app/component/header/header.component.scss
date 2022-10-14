@@ -14,25 +14,22 @@ header{
         justify-content: center;
         @media screen and (max-width:760px) {
             position: relative;
-            justify-content: end;
+            justify-content: flex-end;
         }
         &-pages{
             display: flex;
             gap: 20px;
-            a{
+            cursor: pointer;
+            fa-icon{
+                display: flex;
+                justify-content: center;
+                align-self: center;
+                font-size: 1.2rem;
+            }
+            p{
                 padding: 1rem 2vw;
                 height: max-content;
                 min-width: max-content;
-            }
-            @media screen and (max-width:760px) {
-                display: none;
-            }
-        }
-        &-languages{
-            display: flex;
-            gap: 5px;
-            p{
-                padding:1rem 0.5rem;
             }
             @media screen and (max-width:760px) {
                 display: none;
@@ -47,6 +44,9 @@ header{
             }
             fa-icon{
                 transition: color 0.5s ease;
+                display: flex;
+                align-items: center;
+                font-size: 20px;
             }
         }
         &-dropdown{
@@ -71,11 +71,6 @@ header{
             p:hover{
                 color: rgb(6, 98, 202);
                 font-weight: 600;
-            }
-            &__languages{
-                display: flex;
-                gap: 5px;
-                font-size: 1.5rem;
             }
             .iconCrossDropdown{
                 position:absolute;

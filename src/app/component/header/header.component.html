@@ -6,12 +6,20 @@
             <p (click)="outputIndex('service','full')">Servicios</p>
             <p (click)="outputIndex('projects','full')">Proyectos</p>
             <p (click)="outputIndex('contact','full')">Contacto</p>
+            <div class="flex">
+                <div class="flex" *ngIf="!login; else logOutTemplate" (click)="outputIndex('login','full')">
+                    <p>iniciar</p>
+                    <fa-icon [icon]="iUser"></fa-icon>
+                </div>
+                <ng-template #logOutTemplate>
+                    <div class="flex">
+                        <p (click)="logOut()" >cerrar</p>
+                        <fa-icon [icon]="iOut"></fa-icon>
+                    </div>
+                </ng-template>
+            </div>
         </div>
-        <div class="nav-languages">
-            <p>ingles</p>
-            <p> | </p>
-            <p>español</p>
-        </div>
+
         <div  class="nav-movilBar">
             <fa-icon class="iconBar" (click)="changeDropdown()" [icon]="iBar"></fa-icon>
             <div class="nav-dropdown">
@@ -20,11 +28,16 @@
                 <p (click)="outputIndex('service','movil')">Servicios</p>
                 <p (click)="outputIndex('projects','movil')">Proyectos</p>
                 <p (click)="outputIndex('contact','movil')">Contacto</p>
-                <div class="nav-dropdown__languages">
-                    <p>ingles</p>
-                    <p> | </p>
-                    <p>español</p>
+                <div class="flex items-center text-2xl" *ngIf="!login; else logOutTemplate" (click)="outputIndex('login','full')">
+                    <p>iniciar</p>
+                    <fa-icon [icon]="iUser"></fa-icon>
                 </div>
+                <ng-template #logOutTemplate>
+                    <div class="flex items-center text-2xl">
+                        <p (click)="logOut()" >cerrar</p>
+                        <fa-icon [icon]="iOut"></fa-icon>
+                    </div>
+                </ng-template>
                 <fa-icon (click)="changeDropdown()" class="iconCrossDropdown" [icon]="iCross"></fa-icon>
             </div>
         </div>

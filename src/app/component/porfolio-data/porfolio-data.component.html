@@ -25,21 +25,21 @@
             </div>
         </div>
     </div>
-
-
+    
+    
     <div class="section-presentation-skills">
         <ng-container *ngFor="let typeItem of listType;let num = index">
             <ul appCreateElement="{{addON}}"  (deleteDataEmit)="deleteItem($event)" (dataEmit)="saveItem($event)" (eventEdit)="itemEdit($event)"  
             id="{{'SKILLS' + typeItem.name.toUpperCase()}}">
-                <li class="section-presentation-skills-{{typeItem.name.toLowerCase()}}">
-                    <h2>{{typeItem.name.toUpperCase()}}</h2>
-                    <div class="{{typeItem.name.toLowerCase()+'Div'}}">
-                        <fa-icon id="{{typeItem.name.toLowerCase()+'Icon'}}"
-                        *ngIf="AcountAdmin===true" [icon]="iconEdit"></fa-icon>
-                    </div>
-                </li>
-                <ng-container *ngFor="let item of [webList,frameList,otherList]">
-                    <ng-container *ngFor="let names of item;let i = index">
+            <li class="section-presentation-skills-{{typeItem.name.toLowerCase()}}">
+                <h2>{{typeItem.name.toUpperCase()}}</h2>
+                <div class="{{typeItem.name.toLowerCase()+'Div'}}">
+                    <fa-icon id="{{typeItem.name.toLowerCase()+'Icon'}}"
+                    *ngIf="AcountAdmin===true" [icon]="iconEdit"></fa-icon>
+                </div>
+            </li>
+            <ng-container *ngFor="let item of [webList,frameList,otherList]">
+                <ng-container *ngFor="let names of item;let i = index">
                         <li id="{{cleanInputId(names.name.toLowerCase())}}" *ngIf="typeItem.name===names.type" class="relative {{'li-'+cleanInputId(names.type.toLowerCase())}}">
                             <input autocomplete="off" type="text" (saveInput)="saveEditItem($event)" appEditText='{{addON}}'  class="text-black text-center"
                             id="text-{{cleanInputId(names.name.toLowerCase())}}" value="{{cleanInput(names.name.toUpperCase())}}">

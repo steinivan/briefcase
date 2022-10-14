@@ -39,17 +39,20 @@ export class CreateElementDirective implements AfterViewInit {
     return extract.split(remove)[1].toLowerCase();
   }
   clickEmitName(mode?:any){
-    const icon = this.renderer.selectRootElement(`#${this.name}Icon`,true)
-    if(mode==='edit'){
+    try{
+      const icon = this.renderer.selectRootElement(`#${this.name}Icon`,true)
+      if(mode==='edit'){
+        this.clickEditListen = this.renderer.listen(icon,'click',(event)=>{
+          this.eventEdit.emit(this.name)
+        })
+        return
+      }
       this.clickEditListen = this.renderer.listen(icon,'click',(event)=>{
         this.eventEdit.emit(this.name)
+        this.editMode('edit')
       })
-      return
+    } catch(error){
     }
-    this.clickEditListen = this.renderer.listen(icon,'click',(event)=>{
-      this.eventEdit.emit(this.name)
-      this.editMode('edit')
-    })
   }
 
   ngAfterViewInit(): void {
@@ -141,7 +144,6 @@ export class CreateElementDirective implements AfterViewInit {
     } else {
       const ref = this.ref.nativeElement
       const itemCreate = this.renderer.selectRootElement('#input-create').parentNode
-        console.log(itemCreate,"remover")
         this.renderer.removeChild(this.ref.nativeElement,itemCreate)
         this.editMode('reset')
     }

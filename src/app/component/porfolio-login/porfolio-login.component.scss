@@ -1,84 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
 
-
-.section-upImg{
-}
-    .formUp{
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(163, 163, 163);
-        height: 40%;
-        width: 50%;
-        min-width: 320px;
-        min-height: 314px;
-        .formCross{
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 0rem 1rem;
-            color: rgb(204, 14, 14);
-            font-size: 2rem;
-            z-index: 10;
-            fa-icon{
-                cursor: pointer;
-            }
-        }
-        .inputFileImg{
-            height: 70%;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: flex-end;
-            margin-bottom: 4rem;
-            z-index: 4;
-            div{
-                height: 80%;
-                width: 90%;
-                object-fit: cover;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                img{
-                    height: 80%;
-                    width: 60%;
-                }
-            }
-        }
-        .formButtons{
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            z-index: 4;
-            p{
-                width: 25%;
-                display: flex;
-                justify-content: center;
-                min-width: max-content;
-                align-items: center;
-                padding:1rem;
-                cursor: pointer;
-            }
-        }
-    }
-    .formUp::before{
-        content: '';
-        background-color: #00000087;
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        z-index: 2;
-    }
-.section-contactForm{
+.section-loginForm{
+    background-color: #090947;
     @media screen and (max-height:720px) {
         overflow-y: scroll;
     }
@@ -106,6 +29,7 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        color:#3ab8b0;
         h2{
             font-size: 2rem;
             color:#3ab8b0;
@@ -117,12 +41,8 @@
             gap:20px;
             width: 70%;
             max-width: 668px;
-            min-width: 250px;
+            min-width: 315px;
             min-height: 661px;
-            margin-top: 1rem;
-            @media screen and (max-height:740px){
-                margin-top:3rem;
-            }
             justify-content: center;
             align-items: center;
             .containInput{
@@ -178,13 +98,6 @@
                     font-weight: 800;
                 }
             }
-            textarea{
-                color:black;
-                width: 100%;
-                border-radius: 0.4rem;
-                font-size: 1rem;
-                padding-left: 1rem;
-            }
         }
     }
     .formFooter{
@@ -192,13 +105,13 @@
         padding: 1rem 0;
         position: absolute;
         bottom: 0;
-        @media screen and (max-height:740px) {
+        @media screen and (max-height:653px) {
             position:relative;
         }
     }
 }
 .section-contact{
-    min-height:527px;
+    min-height:494px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -251,27 +164,18 @@
             width: 100%;
             position: absolute;
             top: 35%;
-            z-index: -1;
         }
         &_image{
             height: 12em;
             width: 12em;
             border: thin solid white;
             border-radius: 50%;
+            background-image: url(../../../assets/person.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             position: relative;
             margin-right: 0rem;
-            div{
-                height: 100%;
-                width: 100%;
-                border-radius: inherit;
-                overflow: hidden;
-                img{
-                    overflow: hidden;
-                    height: 100%;
-                    width: 100%;
-                    object-fit: fill;
-                }
-            }
             fa-icon{
                 position: absolute;
                 bottom: 7px;
@@ -288,7 +192,7 @@
 }
 
 @media screen and (min-width:500px) {
-    .section-contactForm{
+    .section-loginForm{
         @media screen and (max-height:720px) {
             overflow-y: scroll;
         }
@@ -464,7 +368,7 @@
                     width: 12em;
                     border: thin solid white;
                     border-radius: 50%;
-                    // background-image: url(../../../assets/person.jpeg);
+                    background-image: url(../../../assets/person.jpeg);
                     background-repeat: no-repeat;
                     background-position: center;
                     background-size: cover;
@@ -487,7 +391,7 @@
 }
 
 @media screen and (min-width:600px) {
-    .section-contactForm{
+    .section-loginForm{
         
         .formFooter{
             width: 100vw;
@@ -660,7 +564,7 @@
                     width: 12em;
                     border: thin solid white;
                     border-radius: 50%;
-                    // background-image: url(../../../assets/person.jpeg);
+                    background-image: url(../../../assets/person.jpeg);
                     background-repeat: no-repeat;
                     background-position: center;
                     background-size: cover;

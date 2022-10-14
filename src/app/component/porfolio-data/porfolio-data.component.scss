@@ -142,14 +142,15 @@
                 }
         }
         &-skills{
-            margin-top: 5rem;
+            // margin-top: 5rem;
+            padding: 5rem 0;
             display: grid;
             font-family: 'Montserrat', sans-serif;
             justify-items: center;
             justify-content: center;
             grid-template-columns: repeat(1,1fr);
             gap: 15px;
-            padding-bottom: 3rem;
+            // padding-bottom: 6rem;
             ul:nth-last-child(1){
                 grid-column: span 1;
             }
@@ -257,7 +258,7 @@
             &-colOther{
                 grid-column-start: 3;
             }
-            @media screen and (min-width:400px) {
+            @media screen and (min-width:460px) {
                 grid-template-columns: repeat(2,1fr);
                 ul:nth-last-child(1){
                     grid-column: span 2;

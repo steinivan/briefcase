@@ -70,7 +70,7 @@
                 grid-template-columns: 50% 50%;
                 div{
                     display: flex;
-                    justify-content: end;
+                    justify-content: flex-end;
                 }
             }
         }
@@ -87,6 +87,7 @@
             margin-top:2rem;
             h2{ 
                 font-family: 'Montserrat', sans-serif; 
+                cursor: pointer;
             }
             fa-icon{
                 color: rgb(0, 182, 182);
@@ -152,7 +153,7 @@
                     grid-template-columns: repeat(2,1fr);
                     div{
                         display: flex;
-                        justify-content: end;
+                        justify-content: flex-end;
                         min-width: 200px;
                     }
                 }
@@ -178,7 +179,7 @@
         }
         @media screen and (max-height:600px) {
             section{
-                justify-content: start;
+                justify-content: flex-start;
             }
         }
         @media screen and (min-width:640px) {
@@ -243,7 +244,7 @@
                     transform: translate(0px, -80px);
                     div{
                         display: flex;
-                        justify-content: end;
+                        justify-content: flex-end;
                         min-width: 200px;
                     }
                 }
