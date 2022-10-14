@@ -4,6 +4,7 @@ import  {SwiperOptions} from 'swiper';
 import SwiperCore,{Navigation,Pagination,Keyboard,Lazy,EffectCube} from 'swiper'
 import {faReply,faShare} from '@fortawesome/free-solid-svg-icons'
 import {ResizeService} from '../../service/BreakpointObserver/resize.service'
+import { delay } from 'rxjs';
 SwiperCore.use([Keyboard,Navigation,Lazy,Pagination,EffectCube])
 
 @Component({
@@ -38,6 +39,8 @@ export class PorfolioProyectsComponent implements AfterContentChecked {
     changeViewIconI = faReply;
     changeViewIconR = faShare;
     // icon
+    proyectName:String[]=["Coffe Proyect","BookFlix Proyect","Naruto Game Card Proyect","Shipland"];
+    nameProyectI:String="Coffe Proyect";
   constructor(private ResService:ResizeService) {
     this.getResizeWindow()
    }
@@ -59,20 +62,25 @@ export class PorfolioProyectsComponent implements AfterContentChecked {
     this.swiper.swiperRef.slidePrev(1000)
     
   }
+  @ViewChild('nameProyects') nameProyects:ElementRef;
   changeProyectSlide(){
-    if(this.swiper.swiperRef.activeIndex===0){
+    const index = this.swiper.swiperRef.activeIndex;
+    if(index===0){
       this.elRefBack.nativeElement.classList.add("swiper-button-hidden")
     }
-    if(this.swiper.swiperRef.activeIndex>0){
+    if(index>0){
       this.elRefBack.nativeElement.classList.remove("swiper-button-hidden")
     }
 
-    if(this.swiper.swiperRef.activeIndex===3){
+    if(index===3){
       this.elRefNext.nativeElement.classList.add("swiper-button-hidden")
     }
-    if(this.swiper.swiperRef.activeIndex<3){
+    if(index<3){
       this.elRefNext.nativeElement.classList.remove("swiper-button-hidden")
     }
+    setTimeout(()=>{
+      this.nameProyects.nativeElement.innerHTML = this.proyectName[index];
+    },800)
   }
   @HostListener('window:resize', ['$event'])
   getResizeWindow($event?:Event){
@@ -86,18 +94,19 @@ export class PorfolioProyectsComponent implements AfterContentChecked {
       return false;
     }
   }
-  redirectPage(page:String){
-    switch (page) {
-      case 'shipland':
+  redirectPage(){
+    const index = this.swiper.swiperRef.activeIndex;
+    switch (index) {
+      case 3:
         window.open('http://www.shiplandoficial.com/')
         break;
-      case 'naruto':
+      case 2:
         window.open('https://benevolent-gelato-86c9d9.netlify.app')
         break;
-      case 'bookflix':
+      case 1:
         window.open('https://gentle-puffpuff-82fd3a.netlify.app')
         break;
-      case 'coffe':
+      case 0:
         window.open('https://ivan-cafesite.netlify.app')
         break;
     

@@ -15,6 +15,7 @@ body{
 
 .swiper-pagination{
   left: 20px;
+  width: min-content;
 }
 .swiper-pagination-bullet{
   border:thin solid white;
@@ -23,15 +24,10 @@ body{
   background-color: white;
 }
 
-.swiper-slide:nth-child(3){
-  padding: 0 6em;
-}
-
-
 
 .swiper-slide {
   background-color: rgba(0, 0, 0, 0.911);
   height: 100%;
   width: 100%;
-
+  overflow: hidden;
 }

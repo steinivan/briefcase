@@ -1,0 +1,21 @@
+<app-spinner></app-spinner>
+<div class="section-loginForm">
+    <div class="section-loginForm-form">
+        <form [formGroup]="FormSubmit" (ngSubmit)="submitForm(FormSubmit.value)">
+            <div class="section-loginForm-headerForm">
+                <h2>Iniciar Sesion</h2>
+                <fa-icon [icon]="iBack" (click)="back()"></fa-icon>
+            </div>
+            <div class="containInput">
+                <p>Nombre<span *ngIf="errorMail">Mail incorrecto</span></p>
+                <input [ngClass]="{errorClass : formIf('email') }" formControlName="email" type="text" >
+            </div>
+            <div class="containInput"> 
+                <p>Contraseña <span *ngIf="errorPassword">contraseña incorrecta</span></p>
+                <input [ngClass]="{errorClass : formIf('password') }" formControlName="password" type="password" >
+            </div>
+            <button class="buttonSubmit" type="submit">iniciar</button>
+            <app-footer class="formFooter"></app-footer>
+        </form>
+    </div>
+</div>
